@@ -12,8 +12,8 @@
             <div class="click">
                 <p>Click in the grid to toggle the pen on.</p>
                 <div>
-                    <button>Clear</button>
-                    <button>Save</button>
+                    <button id="clear">Clear</button>
+                    <button id="save">Save</button>
                 </div>
                 <div class="slidecontainer">
                     <p>Grid Size:</p>
@@ -23,8 +23,8 @@
                     </div>
                 </div>
                 <div class="thebuttons">
-                    <div><button class="button options" id="a1" onclick="Eraser()">Eraser</button></div>
-                    <div><button class="button options" id="a2">Draw</button></div>
+                    <div><button class="button options" id="a1" onclick="Eraser()" >Eraser</button></div>
+                    <div><button class="button options" id="a2" onclick="Draw()" value="draw">Draw</button></div>
                     <div><button class="button options" id="a3" onclick="Rainbow()">Rainbow</button></div>
                     <div><button class="button options" id="a4" onclick="Fill()">Fill</button></div>
                     <div><button class="button options" id="a5" onclick="Color()">Color</button></div>
@@ -32,7 +32,6 @@
                 </div>
             </div>
         </div>
-        <p id="test"></p>
         <div class="grid">
             <div class="canvas">
 
@@ -48,5 +47,5 @@
 
 </body>
 </div>
-<script src="etch.js"></script>
+<script type="text/javascript" src="etch.js">console.log("hello world")</script>
 </html>
