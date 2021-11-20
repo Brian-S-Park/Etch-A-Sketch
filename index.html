@@ -5,47 +5,50 @@
     <link rel="stylesheet" href="etch.css">
     <div class="container">
     <title>Etch-A-Sketch</title>
-    <h1>Etch-A-Sketch</h1>
+
     <body>
     <div class="whole">
         <div class="sidebox">
             <div class="click">
                 <p>Click in the grid to toggle the pen on.</p>
                 <div>
-                    <button id="clear">Clear</button>
+                    <button id="clear" onclick="Clear()">Clear</button>
                     <button id="save">Save</button>
-                </div>
-                <div class="slidecontainer">
-                    <p>Grid Size:</p>
-                    <div>
-                        <input type="range" min="1" max="100" value="50">
-                        <div><form id="squares"></form></div>
-                    </div>
                 </div>
                 <div class="thebuttons">
                     <div><button class="button options" id="a1" onclick="Eraser()" >Eraser</button></div>
-                    <div><button class="button options" id="a2" onclick="Draw()" value="draw">Draw</button></div>
+                    <div><button class="button options" id="a2" onclick="Draw()" >Draw</button></div>
                     <div><button class="button options" id="a3" onclick="Rainbow()">Rainbow</button></div>
                     <div><button class="button options" id="a4" onclick="Fill()">Fill</button></div>
                     <div><button class="button options" id="a5" onclick="Color()">Color</button></div>
-                    
+                </div>
+                <div class="thesizes">
+                    <button id="small" onclick="small()" >small</button>
+                    <button id="medium" onclick="medium()">medium</button>
+                    <button id="large" onclick="large()">large</button>
                 </div>
             </div>
         </div>
-        <div class="grid">
-            <div class="canvas">
-
+        <div class="space2"></div>
+        <div class="box" id="box">
+            <div class="name">        
+            <h1>etch-a-sketch</h1>
+            </div>
+            <div class="grid" id="grid"></div>
+            <div class="shapes">
+                <div class="circle"></div>
+                <div class="space"></div>
+                <div class="circle"></div>
             </div>
         </div>
     </div>
-    <div class="footer">
-        <a href="https://github.com/Brian-S-Park">
-          <img src="./img/githublogo.png" alt="" height=30px; </img>
-        </a>
-        <p2>Brian S Park</p2>
-      </div>
-
 </body>
 </div>
-<script type="text/javascript" src="etch.js">console.log("hello world")</script>
+<div class="footer">
+    <a href="https://github.com/Brian-S-Park">
+      <img src="./img/githublogo.png" alt="" height=30px; </img>
+    </a>
+    <p2>Brian S Park</p2>
+  </div>
+<script type="text/javascript" src="etch.js"></script>
 </html>
