@@ -104,7 +104,7 @@ function color(){
 }
 
 function cursor(){
- 
+
 
 }
 function animate(){
@@ -130,14 +130,16 @@ document.addEventListener("keyup", function(key) {
         }, 1000);
     }
   });
-
+function active(){
+    
+}
 // const active = () => {
 //     let clickedPixels = document.querySelectorAll('.pixel');
 //     clickedPixels.forEach(pxl => {
-//         pixel.addEventListener('mouseover', (e) =>{
+//         pixel.addEventListener('mouseover', (e) => {
 //             let currentColor = getComputedStyle(pxl, null).getPropertyValue('background-color');
 
-//             e.target.backgroundCOlor = 'rgba(0,0,0)';
+//             e.target.style.backgroundColor = 'rgba(0,0,0)';
 
 
 //             }
