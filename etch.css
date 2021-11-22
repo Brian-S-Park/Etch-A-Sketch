@@ -36,7 +36,6 @@ button{
 }
 .grid > div{
     border:0.5px solid lightgrey;
-    background: whitesmoke;
 }
 .click{
     display: flex;
