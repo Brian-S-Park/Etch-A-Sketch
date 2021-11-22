@@ -75,6 +75,7 @@ function medium() {
     grid_div.style.gridTemplateColumns = `repeat(32, 1fr)`
     grid_div.style.gridTemplateRows = `repeat(32, 1fr)`
     clear();
+    
     for (let i = 0; i < 32 * 32; i++) {
           const pixel = document.createElement('div');
           pixel.classList.add('pixel');
@@ -95,7 +96,7 @@ function large() {
 }
 function clear(){
     grid_div.innerHTML = '';
-    //active;
+    active();
 }
 
 //grid_item.addEventListener("click", color);
@@ -130,19 +131,13 @@ document.addEventListener("keyup", function(key) {
         }, 1000);
     }
   });
+
 function active(){
-    
+    let clickedPixels = document.querySelectorAll('.pixel');
+    clickedPixels.forEach(pxl => {
+        pixel.addEventListener('click', () => {
+//            let currentColor = getComputerStyle(pxl, null).getPropertyValue('background-color');
+            grid_div.classList.add('active');
+        });
+    });
 }
-// const active = () => {
-//     let clickedPixels = document.querySelectorAll('.pixel');
-//     clickedPixels.forEach(pxl => {
-//         pixel.addEventListener('mouseover', (e) => {
-//             let currentColor = getComputedStyle(pxl, null).getPropertyValue('background-color');
-
-//             e.target.style.backgroundColor = 'rgba(0,0,0)';
-
-
-//             }
-//         });
-//     });
-// }
