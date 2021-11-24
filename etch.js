@@ -12,6 +12,7 @@ const Box=document.getElementById("box");
 const Default=16;
 const nameArray= [Draw_button,Eraser_button,Rainbow_button,Fill_button,Color_button];
 let x=0;
+const active=document.getElementsByClassName("pixel");
 //const currentMode;
 Draw_button.addEventListener("click", function() {
     for (let i = 0; i <= 4 ; i++) {
@@ -60,43 +61,45 @@ function reset(){
 }
 
 function small() {
-    grid_div.style.gridTemplateColumns = `repeat(16, 1fr)`
-    grid_div.style.gridTemplateRows = `repeat(16, 1fr)`
+    grid_div.style.gridTemplateColumns = `repeat(16, auto)`
+    grid_div.style.gridTemplateRows = `repeat(16, auto)`
     clear();
     for (let i = 0; i < 16 * 16; i++) {
           const pixel = document.createElement('div');
           pixel.classList.add('pixel');
-          pixel.style.backgroundColor = 'whitesmoke';
+          //pixel.style.backgroundColor = 'whitesmoke';
           grid_div.appendChild(pixel);
         }
 }
 
 function medium() {
-    grid_div.style.gridTemplateColumns = `repeat(32, 1fr)`
-    grid_div.style.gridTemplateRows = `repeat(32, 1fr)`
+    grid_div.style.gridTemplateColumns = `repeat(32, auto)`
+    grid_div.style.gridTemplateRows = `repeat(32, auto)`
     clear();
     
     for (let i = 0; i < 32 * 32; i++) {
           const pixel = document.createElement('div');
           pixel.classList.add('pixel');
-          pixel.style.backgroundColor = 'whitesmoke';
+          pixel.id="pixel";
+          //pixel.style.backgroundColor = 'whitesmoke';
           grid_div.appendChild(pixel);
+
         }
 }
 function large() {
-    grid_div.style.gridTemplateColumns = `repeat(64, 1fr)`
-    grid_div.style.gridTemplateRows = `repeat(64, 1fr)`
+    grid_div.style.gridTemplateColumns = `repeat(64, auto)`
+    grid_div.style.gridTemplateRows = `repeat(64, auto)`
     clear();
     for (let i = 0; i < 64 * 64; i++) {
           const pixel = document.createElement('div');
           pixel.classList.add('pixel');
-          pixel.style.backgroundColor = 'whitesmoke';
+          //pixel.style.backgroundColor = 'whitesmoke';
           grid_div.appendChild(pixel);
         }
 }
 function clear(){
     grid_div.innerHTML = '';
-    active();
+   //active();
 }
 
 //grid_item.addEventListener("click", color);
@@ -132,12 +135,16 @@ document.addEventListener("keyup", function(key) {
     }
   });
 
-function active(){
-    let clickedPixels = document.querySelectorAll('.pixel');
-    clickedPixels.forEach(pxl => {
-        pixel.addEventListener('click', () => {
-//            let currentColor = getComputerStyle(pxl, null).getPropertyValue('background-color');
-            grid_div.classList.add('active');
-        });
-    });
-}
+
+grid_div.addEventListener('mousedown', function() {
+    mooed();
+    //grid_div.removeChild(pixel);
+    document.getElementById("pixel").classList.toggle("active");
+
+    //grid_div.style.backgroundColor="black";
+});
+
+
+ function mooed(){
+     console.log("mooing over here");
+ }

@@ -25,7 +25,7 @@ button{
     float:left;
 }
 
-.active{
+.pixel.active{
     background-color:black;
 }
 .grid{
@@ -97,6 +97,9 @@ p{
 
 p2{
     padding:10px;
+}
+.pixel{
+    background-color:whitesmoke;
 }
 .options{
     width:250px;
