@@ -177,7 +177,7 @@ p2{
 }
 @keyframes reset{
     0%{
-    transform: translateY(0px);
-    transform: translateX(0px);
+        transform: translateY(0px);
+        transform: translateX(0px);
     }
 }
