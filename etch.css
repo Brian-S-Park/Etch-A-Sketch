@@ -28,6 +28,7 @@ button{
 .pixel.active{
     background-color:black;
 }
+
 .grid{
     display:grid;
     width:700px;
@@ -100,6 +101,9 @@ p2{
 }
 .pixel{
     background-color:whitesmoke;
+}
+.pixel:hover{
+    background-color:orange;
 }
 .options{
     width:250px;

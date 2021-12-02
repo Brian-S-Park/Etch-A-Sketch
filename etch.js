@@ -1,3 +1,9 @@
+//12-1 Need to fix clear so that it will return the proper amount of squares
+//TO-DO Need to work on color function
+//      Need to add eraser feature
+//      Fix the expanding borders of etch a sketch
+//      
+
 const Draw_button=document.getElementById("a2");
 const Eraser_button=document.getElementById("a1");
 const Rainbow_button=document.getElementById("a3");
@@ -13,11 +19,8 @@ const Default=16;
 const array=[];
 const nameArray=[Draw_button,Eraser_button,Rainbow_button,Fill_button,Color_button];
 let x=0;
-const center=((32*32)/2)+15;
-let move=0;
-//const active=document.getElementsByClassName("pixel");
+let currentSize;
 
-//const currentMode;
 
 Draw_button.addEventListener("click", function() {
     for (let i = 0; i <= 4 ; i++) {
@@ -25,7 +28,7 @@ Draw_button.addEventListener("click", function() {
     }
     Draw_button.style.backgroundColor="darkred";
 }); 
-Eraser_button.addEventListener("click", function() {
+Eraser_button.addEventListener("click", function(e) {
     for (let i = 0; i <= 4 ; i++) {
         nameArray[i].style.backgroundColor="#FE3540";
     }
@@ -57,55 +60,50 @@ Clear_button.addEventListener("click", function() {
     setTimeout(() => {
         Clear_button.style.backgroundColor="#FE3540";
         Box.style.animation = "reset";
-    }, 1000); 
+        generate(16);
+        //temporary fix to make it small
+    }, 700); 
 }); 
 
 
 function reset(){
 
 }
+function generate(gridSize){
+    grid_div.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
+    grid_div.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`
+    clear();
+    for (let i = 0; i < gridSize * gridSize; i++) {
+            let pixel = document.createElement('div');
+            pixel.classList.add('pixel');
+            grid_div.appendChild(pixel);
+            pixel.id=('pixel');
+          }
+            let gridBoxes=document.querySelectorAll('.pixel');
+            gridBoxes.forEach((pixel)=> {
+                pixel.addEventListener('mouseover', (e) => {
+                    pixel.classList.add('active');
+                    
+                });
+        });
+}
 
 function small() {
-    grid_div.style.gridTemplateColumns = `repeat(16, auto)`
-    grid_div.style.gridTemplateRows = `repeat(16, auto)`
-    clear();
-    for (let i = 0; i < 16 * 16; i++) {
-          const pixel = document.createElement('div');
-          pixel.classList.add('pixel');
-          grid_div.appendChild(pixel);
-          pixel.addEventListener("click", mooed);
-        }
+    let gridSize=16;
+    generate(gridSize);
 }
 
 function medium() {
-    grid_div.style.gridTemplateColumns = `repeat(32, auto)`
-    grid_div.style.gridTemplateRows = `repeat(32, auto)`
-    clear();
-    
-    for (let i = 0; i < 32 * 32; i++) {
-          let pixel = document.createElement('div');
-          pixel.classList.add('pixel');
-          pixel.id=("pixel"+i);
-          let array=["pixel"+i];
-          //console.log(array[i]);
-          grid_div.appendChild(pixel);
-          pixel.addEventListener("click", mooed);
-        }
+    let gridSize=32;
+    generate(gridSize);
+    return gridSize;
 }
 function large() {
-    grid_div.style.gridTemplateColumns = `repeat(64, auto)`
-    grid_div.style.gridTemplateRows = `repeat(64, auto)`
-    clear();
-    for (let i = 0; i < 64 * 64; i++) {
-          const pixel = document.createElement('div');
-          pixel.classList.add('pixel');
-          //pixel.style.backgroundColor = 'whitesmoke';
-          grid_div.appendChild(pixel);
-        }
+    let gridSize=50;
+    generate(gridSize);
 }
 function clear(){
     grid_div.innerHTML = '';
-   //active();
 }
 
 //grid_item.addEventListener("click", color);
@@ -113,35 +111,13 @@ function color(){
 
 }
 
-function cursor(){
-    let center=((32*32)/2)+15;
-    console.log(center);
-    document.getElementById("pixel"+center).classList.toggle("active");
-    return center;
-}
 function animate(){
     Box.style.animation = "eraseEtch 1s ease";
 }
 
-window.onload = () => {small()}
+window.onload = () => {small();Draw_button.style.backgroundColor="darkred";}
 
-document.addEventListener("keydown", function(key) {
-    if (key.code == 'ArrowUp' || key.code == 'KeyW'){
-      key.preventDefault();
-        
-        move=center+32;
-        console.log(move);
-        document.getElementById("pixel"+move).classList.add("active");
-        return move;
-    }
-});
 
-document.addEventListener("keyup", function(key) {
-    if (key.code == 'KeyN'){
-      key.preventDefault();
-        cursor();
-    }
-});
 document.addEventListener("keyup", function(key) {
     if (key.code == 'Backspace'){
       key.preventDefault();
@@ -150,16 +126,15 @@ document.addEventListener("keyup", function(key) {
         setTimeout(() => {
             Clear_button.style.backgroundColor="#FE3540";
             Box.style.animation = "reset";
-        }, 1000);
+            medium();
+        }, 700);
     }
 });
 
-// let griditems=document.querySelectorAll('pixel.grid_div');
-// for(let i=0;i>griditems.length;i++){
-//     griditems[i].addEventListener("click", mooed);
-// }
+
+
  function mooed(){
-     console.log("mooing over here");
-     //document.getElementById("pixel").classList.toggle("active");
+     console.log("moooed");
+     pixel.classList.add('active');
 
  }
