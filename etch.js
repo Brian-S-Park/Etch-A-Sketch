@@ -61,7 +61,7 @@ Clear_button.addEventListener("click", function() {
         Clear_button.style.backgroundColor="#FE3540";
         Box.style.animation = "reset";
         generate(16);
-        //temporary fix to make it small
+        //temporary fix to make it small again
     }, 700); 
 }); 
 
@@ -126,7 +126,7 @@ document.addEventListener("keyup", function(key) {
         setTimeout(() => {
             Clear_button.style.backgroundColor="#FE3540";
             Box.style.animation = "reset";
-            medium();
+            generate(32);
         }, 700);
     }
 });
