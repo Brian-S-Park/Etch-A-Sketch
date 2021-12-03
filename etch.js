@@ -1,13 +1,7 @@
-//12-1 Need to fix clear so that it will return the proper amount of squares
-//TO-DO Need to work on color function
-//      Need to add eraser feature
-//      Fix the expanding borders of etch a sketch
-//      
-
 const Draw_button=document.getElementById("a2");
 const Eraser_button=document.getElementById("a1");
 const Rainbow_button=document.getElementById("a3");
-const Fill_button=document.getElementById("a4");
+const Greyscale_button=document.getElementById("a4");
 const Color_button=document.getElementById("a5");
 const grid_div=document.getElementById("grid");
 const Clear_button=document.getElementById("clear");
@@ -15,13 +9,11 @@ const Save_button=document.getElementById("save");
 const Slider=document.getElementById("slider");
 const Box=document.getElementById("box");
 const pixel=document.getElementById("pixel");
-const colorBox=document.getElementById("colorBox");
-const nameArray=[Draw_button,Eraser_button,Rainbow_button,Fill_button,Color_button];
+const colorWheel=document.getElementById("favcolor"); 
+const nameArray=[Draw_button,Eraser_button,Rainbow_button,Greyscale_button,Color_button];
 const classArray=['rainbow','color','active'];
-const drawMode=['mouseover','mousedown'];
 const defaultSize=16;
 let gridSize=defaultSize;
-
 
 
 Draw_button.addEventListener("click", function() {
@@ -34,7 +26,6 @@ Draw_button.addEventListener("click", function() {
                 pixel.classList.add('active');
            }); 
         });
-
 }); 
 
 Eraser_button.addEventListener("click", function() {
@@ -44,7 +35,6 @@ Eraser_button.addEventListener("click", function() {
     gridBoxes.forEach((pixel)=> {
                 pixel.addEventListener('mouseover', (e) => {
                     reset(pixel);
-                    pixel.classList.remove('active');
            }); 
         });
 }); 
@@ -59,25 +49,34 @@ Rainbow_button.addEventListener("click", function() {
                 let randomColors1=Math.floor(Math.random()*255);
                 let randomColors2=Math.floor(Math.random()*255);
                 let randomColors3=Math.floor(Math.random()*255);
-                //console.log(randomColors);
                 pixel.style.backgroundColor=`rgb(${randomColors1},${randomColors2},${randomColors3})`;
-                //pixel.classList.add('rainbow');
-                //need to find out how to undo the style added in this so you can switch back to draw
             }); 
          });
 }); 
 
-Fill_button.addEventListener("click", function() {
+Greyscale_button.addEventListener("click", function() {
     styleReset();
-    Fill_button.style.backgroundColor="darkred";
+    Greyscale_button.style.backgroundColor="darkred";
+    let gridBoxes=document.querySelectorAll('.pixel');
+    gridBoxes.forEach((pixel)=> {
+       pixel.addEventListener('mouseover', (e) => {
+               reset(pixel);
+               let randomColors=Math.floor(Math.random()*255);
+               pixel.style.backgroundColor=`rgb(${randomColors},${randomColors},${randomColors})`;
+           }); 
+        });
 }); 
-
 Color_button.addEventListener("click", function() {
     styleReset();
     Color_button.style.backgroundColor="darkred";
-    
+    let gridBoxes=document.querySelectorAll('.pixel');
+    gridBoxes.forEach((pixel)=> {
+       pixel.addEventListener('mouseover', (e) => {
+               reset(pixel);
+               pixel.style.backgroundColor=colorWheel.value;
+           }); 
+        });
 });
-
 Clear_button.addEventListener("click", function() {
     Clear_button.style.backgroundColor="darkred";
     animate();
@@ -89,7 +88,6 @@ Clear_button.addEventListener("click", function() {
         generate(gridSize);
     }, 700); 
 }); 
-
 function styleReset(){
     for (let i = 0; i <= 4 ; i++) {
         nameArray[i].style.backgroundColor="#FE3540";
@@ -99,7 +97,7 @@ function reset(pixel){
     for (let i = 0; i < 3 ; i++) {
         pixel.classList.remove(classArray[i]);  
     }
-    pixel.style.backgroundColor.remove;
+    pixel.style.backgroundColor=null;
 }
 
 function generate(gridSize){

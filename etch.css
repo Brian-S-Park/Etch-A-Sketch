@@ -50,6 +50,11 @@ button{
     -moz-transform: scale(0.70);
          transform: scale(0.70);
 }
+#favcolor{
+    width:200px;
+    height:100px;
+    border-radius:10px;
+}
 .footer{
     display:flex;
     flex-flow:row;
