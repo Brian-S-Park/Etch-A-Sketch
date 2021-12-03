@@ -13,45 +13,69 @@ const grid_div=document.getElementById("grid");
 const Clear_button=document.getElementById("clear");
 const Save_button=document.getElementById("save");
 const Slider=document.getElementById("slider");
-const Dimension=document.getElementById("dimension");
 const Box=document.getElementById("box");
-const Default=16;
-const array=[];
+const pixel=document.getElementById("pixel");
+const colorBox=document.getElementById("colorBox");
 const nameArray=[Draw_button,Eraser_button,Rainbow_button,Fill_button,Color_button];
-let x=0;
-let currentSize;
+const classArray=['rainbow','color','active'];
+const drawMode=['mouseover','mousedown'];
+const defaultSize=16;
+let gridSize=defaultSize;
+
 
 
 Draw_button.addEventListener("click", function() {
-    for (let i = 0; i <= 4 ; i++) {
-        nameArray[i].style.backgroundColor="#FE3540";
-    }
+    styleReset();
     Draw_button.style.backgroundColor="darkred";
-}); 
-Eraser_button.addEventListener("click", function(e) {
-    for (let i = 0; i <= 4 ; i++) {
-        nameArray[i].style.backgroundColor="#FE3540";
-    }
-    Eraser_button.style.backgroundColor="darkred";
-}); 
-Rainbow_button.addEventListener("click", function() {
+    let gridBoxes=document.querySelectorAll('.pixel');
+    gridBoxes.forEach((pixel)=> {
+       pixel.addEventListener('mouseover', (e) => {
+                reset(pixel);
+                pixel.classList.add('active');
+           }); 
+        });
 
-    for (let i = 0; i <= 4 ; i++) {
-        nameArray[i].style.backgroundColor="#FE3540";
-    }
-    Rainbow_button.style.backgroundColor="darkred";
 }); 
+
+Eraser_button.addEventListener("click", function() {
+    styleReset();
+    Eraser_button.style.backgroundColor="darkred";
+    let gridBoxes=document.querySelectorAll('.pixel');
+    gridBoxes.forEach((pixel)=> {
+                pixel.addEventListener('mouseover', (e) => {
+                    reset(pixel);
+                    pixel.classList.remove('active');
+           }); 
+        });
+}); 
+
+Rainbow_button.addEventListener("click", function() {
+    styleReset();
+    Rainbow_button.style.backgroundColor="darkred";
+     let gridBoxes=document.querySelectorAll('.pixel');
+     gridBoxes.forEach((pixel)=> {
+        pixel.addEventListener('mouseover', (e) => {
+                reset(pixel);
+                let randomColors1=Math.floor(Math.random()*255);
+                let randomColors2=Math.floor(Math.random()*255);
+                let randomColors3=Math.floor(Math.random()*255);
+                //console.log(randomColors);
+                pixel.style.backgroundColor=`rgb(${randomColors1},${randomColors2},${randomColors3})`;
+                //pixel.classList.add('rainbow');
+                //need to find out how to undo the style added in this so you can switch back to draw
+            }); 
+         });
+}); 
+
 Fill_button.addEventListener("click", function() {
-    for (let i = 0; i <= 4 ; i++) {
-        nameArray[i].style.backgroundColor="#FE3540";
-    }
+    styleReset();
     Fill_button.style.backgroundColor="darkred";
 }); 
+
 Color_button.addEventListener("click", function() {
-    for (let i = 0; i <= 4 ; i++) {
-        nameArray[i].style.backgroundColor="#FE3540";
-    }
+    styleReset();
     Color_button.style.backgroundColor="darkred";
+    
 });
 
 Clear_button.addEventListener("click", function() {
@@ -60,15 +84,24 @@ Clear_button.addEventListener("click", function() {
     setTimeout(() => {
         Clear_button.style.backgroundColor="#FE3540";
         Box.style.animation = "reset";
-        generate(16);
-        //temporary fix to make it small again
+        styleReset();
+        gridSize=slider.value;
+        generate(gridSize);
     }, 700); 
 }); 
 
-
-function reset(){
-
+function styleReset(){
+    for (let i = 0; i <= 4 ; i++) {
+        nameArray[i].style.backgroundColor="#FE3540";
+    }
 }
+function reset(pixel){
+    for (let i = 0; i < 3 ; i++) {
+        pixel.classList.remove(classArray[i]);  
+    }
+    pixel.style.backgroundColor.remove;
+}
+
 function generate(gridSize){
     grid_div.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
     grid_div.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`
@@ -79,43 +112,21 @@ function generate(gridSize){
             grid_div.appendChild(pixel);
             pixel.id=('pixel');
           }
-            let gridBoxes=document.querySelectorAll('.pixel');
-            gridBoxes.forEach((pixel)=> {
-                pixel.addEventListener('mouseover', (e) => {
-                    pixel.classList.add('active');
-                    
-                });
-        });
 }
 
-function small() {
-    let gridSize=16;
+slider.addEventListener('click',function(){
+    let gridSize=slider.value;
+    styleReset();
     generate(gridSize);
-}
-
-function medium() {
-    let gridSize=32;
-    generate(gridSize);
-    return gridSize;
-}
-function large() {
-    let gridSize=50;
-    generate(gridSize);
-}
+});
 function clear(){
     grid_div.innerHTML = '';
 }
-
-//grid_item.addEventListener("click", color);
-function color(){
-
-}
-
 function animate(){
     Box.style.animation = "eraseEtch 1s ease";
 }
 
-window.onload = () => {small();Draw_button.style.backgroundColor="darkred";}
+window.onload = () => {generate(gridSize);}
 
 
 document.addEventListener("keyup", function(key) {
@@ -126,15 +137,18 @@ document.addEventListener("keyup", function(key) {
         setTimeout(() => {
             Clear_button.style.backgroundColor="#FE3540";
             Box.style.animation = "reset";
-            generate(32);
+            styleReset();
+            gridSize=slider.value;
+            generate(gridSize);
         }, 700);
     }
 });
+function drawToggle(){
 
+}
 
 
  function mooed(){
      console.log("moooed");
-     pixel.classList.add('active');
 
  }
