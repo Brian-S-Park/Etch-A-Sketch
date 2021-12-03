@@ -141,12 +141,4 @@ document.addEventListener("keyup", function(key) {
         }, 700);
     }
 });
-function drawToggle(){
 
-}
-
-
- function mooed(){
-     console.log("moooed");
-
- }
