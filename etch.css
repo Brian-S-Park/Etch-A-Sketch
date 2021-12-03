@@ -46,9 +46,9 @@ button{
 }
 .container{
     margin-top:0;
-    -webkit-transform: scale(0.70);
-    -moz-transform: scale(0.70);
-         transform: scale(0.70);
+    -webkit-transform: scale(0.80);
+    -moz-transform: scale(0.80);
+         transform: scale(0.80);
 }
 #favcolor{
     width:200px;
