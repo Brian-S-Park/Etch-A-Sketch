@@ -6,3 +6,5 @@ Future Upgrades:
 * Save Button
 * Toggle to swtich from "mouseover" to "mousedown"
 * Undo button
+
+![alt text](https://github.com/Brian-S-Park/Etch-A-Sketch/blob/main/img/EtchExample.png)
